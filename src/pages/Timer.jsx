@@ -8,14 +8,12 @@ function Timer() {
   const [secondsLeft, setSecondsLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
 
-  // Sync input → timer (only when stopped)
   useEffect(() => {
     if (!isRunning) {
       setSecondsLeft(minutesInput * 60);
     }
   }, [minutesInput, isRunning]);
 
-  // ✅ Effect 1: ticking ONLY
   useEffect(() => {
     if (!isRunning || secondsLeft <= 0) return;
 
@@ -26,7 +24,6 @@ function Timer() {
     return () => clearInterval(interval);
   }, [isRunning, secondsLeft]);
 
-  // ✅ Effect 2: handle completion (runs ONCE)
   useEffect(() => {
     if (secondsLeft !== 0) return;
 
