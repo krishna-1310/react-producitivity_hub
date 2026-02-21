@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppContext } from "../context/useAppContext";
 
 function Todos() {
-  const { todos, setTodos } = useAppContext(); // ✅ CONTEXT
+  const { todos, setTodos } = useAppContext(); 
   const [text, setText] = useState("");
 
   function addTodo() {
