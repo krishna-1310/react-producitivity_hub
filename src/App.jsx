@@ -4,18 +4,21 @@ import Notes from "./pages/Notes";
 import Todos from "./pages/Todos";
 import Timer from "./pages/Timer";
 import { useAppContext } from "./context/useAppContext";
+import "./App.css";
 
 function App() {
   const { activePage } = useAppContext();
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="app-layout">
       <Sidebar />
-      <main className="flex-1 p-6">
-        {activePage === "dashboard" && <Dashboard />}
-        {activePage === "notes" && <Notes />}
-        {activePage === "todos" && <Todos />}
-        {activePage === "timer" && <Timer />}
+      <main className="app-main">
+        <div className="page-enter" key={activePage}>
+          {activePage === "dashboard" && <Dashboard />}
+          {activePage === "notes" && <Notes />}
+          {activePage === "todos" && <Todos />}
+          {activePage === "timer" && <Timer />}
+        </div>
       </main>
     </div>
   );

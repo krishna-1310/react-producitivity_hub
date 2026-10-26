@@ -6,8 +6,12 @@ export function AppProvider({ children }) {
   const [activePage, setActivePage] = useState("dashboard");
 
   const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("notes");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("notes");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -15,22 +19,34 @@ export function AppProvider({ children }) {
   }, [notes]);
 
   const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem("todos");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("todos");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   const [focusMinutes, setFocusMinutes] = useState(() => {
-  const saved = localStorage.getItem("focusMinutes");
-  return saved ? JSON.parse(saved) : 0;
-});
+    try {
+      const saved = localStorage.getItem("focusMinutes");
+      return saved ? JSON.parse(saved) : 0;
+    } catch {
+      return 0;
+    }
+  });
 
-const [sessions, setSessions] = useState(() => {
-  const saved = localStorage.getItem("sessions");
-  return saved ? JSON.parse(saved) : 0;
-});
+  const [sessions, setSessions] = useState(() => {
+    try {
+      const saved = localStorage.getItem("sessions");
+      return saved ? JSON.parse(saved) : 0;
+    } catch {
+      return 0;
+    }
+  });
 
 useEffect(() => {
   localStorage.setItem("focusMinutes", JSON.stringify(focusMinutes));

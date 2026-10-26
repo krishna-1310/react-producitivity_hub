@@ -1,1 +1,124 @@
 @import "tailwindcss";
+
+@theme {
+  /* Warm, slightly off-beat palette — not the typical AI dark theme */
+  --color-bg: #101014;
+  --color-surface: #18181c;
+  --color-surface-raised: #1f1f24;
+  --color-surface-hover: #26262c;
+  --color-border: #2a2a30;
+  --color-border-subtle: #222228;
+
+  --color-text: #e8e6e3;
+  --color-text-secondary: #9d9b97;
+  --color-text-muted: #5c5a56;
+
+  /* One signature accent — not a rainbow */
+  --color-brand: #e8a44a;
+  --color-brand-dim: rgba(232, 164, 74, 0.12);
+  --color-brand-hover: #f0b460;
+
+  /* Functional colors — muted, not neon */
+  --color-done: #6dbb7a;
+  --color-danger: #d46a6a;
+  --color-info: #7aaed4;
+
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  /* Subtle noise grain — feels tactile, handmade */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+#root { min-height: 100vh; }
+
+/* ─── Scrollbar — barely there ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 99px;
+}
+
+::selection {
+  background: var(--color-brand-dim);
+  color: var(--color-brand);
+}
+
+/* ─── The ONLY animation — page entrance. That's it. Restraint. ─── */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: enter 0.35s ease both;
+}
+
+/* ─── Wobble — one playful signature interaction ─── */
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.5deg); }
+  75% { transform: rotate(1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ─── Ticker for the timer ─── */
+@keyframes tick {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ─── Confetti burst — for completing a timer ─── */
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Checkbox bounce ─── */
+@keyframes checkPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Focus ring — simple, warm ─── */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-brand) !important;
+  box-shadow: 0 0 0 3px var(--color-brand-dim) !important;
+}
+
+/* ─── Buttons — no gradients, just honest solids ─── */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
